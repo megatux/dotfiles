@@ -1,0 +1,9 @@
+[color]
+	ui = true
+[user]
+	name = Cristian Molina
+	email = megatux@gmail.com
+[alias]
+  st = status
+	co = checkout
+	ci = commit
