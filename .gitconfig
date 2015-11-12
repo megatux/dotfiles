@@ -7,3 +7,5 @@
   st = status
 	co = checkout
 	ci = commit
+[core]
+	editor = vi
