@@ -7,5 +7,22 @@
   st = status
 	co = checkout
 	ci = commit
+  l = log --oneline
+	restore = clean -xfd
 [core]
-	editor = vi
+	editor = scratch-text-editor
+[credential]
+	helper = /usr/lib/git-core/git-credential-gnome-keyring
+[guitool "Rebase onto..."]
+    cmd = git rebase $REVISION
+    revprompt = yes
+[guitool "Rebase/Continue"]
+    cmd = git rebase --continue
+[guitool "Rebase/Skip"]
+    cmd = git rebase --skip
+[guitool "Rebase/Abort"]
+    cmd = git rebase --abort
+[guitool "Pull with Rebase"]
+    cmd = git pull --rebase
+[push]
+	default = current
