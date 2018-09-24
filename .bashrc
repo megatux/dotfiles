@@ -120,16 +120,14 @@ fi
 #eval "$(rbenv init -)"
 #export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
 
-export PATH="$HOME/.anyenv/bin:$PATH"
-eval "$(anyenv init -)"
+#export PATH="$HOME/.anyenv/bin:$PATH"
+#eval "$(anyenv init -)"
+#export PATH="$PATH:$HOME/.anyenv/envs/erlenv/bin/"
+#export PATH="$PATH:$HOME/.anyenv/envs/exenv/bin/"
 
-
-export PATH="$PATH:$HOME/.anyenv/envs/erlenv/bin/"
-export PATH="$PATH:$HOME/.anyenv/envs/exenv/bin/"
-
-export PATH="$HOME/.linuxbrew/bin:$PATH"
-export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
-export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
+#export PATH="$HOME/.linuxbrew/bin:$PATH"
+#export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
+#export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
 
 # --- Git prompt ---
 export PROMPT_DIRTRIM=3
@@ -146,3 +144,8 @@ function color_my_prompt {
     export PS1="$__cur_location $__git_branch_color$__git_branch$__git_dirty$__prompt_tail $__last_color"
 }
 color_my_prompt
+
+# --------------------------
+. $HOME/.asdf/asdf.sh
+. $HOME/.asdf/completions/asdf.bash
+
