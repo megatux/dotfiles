@@ -9,3 +9,5 @@ alias got="printf '\n\nGOT is the best TV series. Anyway, maybe you mean git, so
 alias cattlematch_reset='curl -XDELETE '\''http://localhost:9200/_all'\'' && bundle exec rake db:drop db:create db:migrate db:seed && bundle exec rake development:load_data searchkick:reindex:all'
 alias xopen=xdg-open
 alias cop="be rubocop"
+rtest="RAILS_ENV=test ruby -Itest $*"
+
