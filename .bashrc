@@ -146,6 +146,13 @@ function color_my_prompt {
 color_my_prompt
 
 # --------------------------
+
+function current_git_branch {
+  git rev-parse --abbrev-ref HEAD
+}
+
 . $HOME/.asdf/asdf.sh
 . $HOME/.asdf/completions/asdf.bash
 
+export EDITOR=io.elementary.code
+export BUNDLER_EDITOR=code
