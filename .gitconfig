@@ -10,7 +10,7 @@
   l = log --oneline
 	restore = clean -xfd
 [core]
-	editor = scratch-text-editor
+	editor = mousepad
 [credential]
 	helper = /usr/lib/git-core/git-credential-gnome-keyring
 [guitool "Rebase onto..."]
