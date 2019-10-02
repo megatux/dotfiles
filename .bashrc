@@ -156,3 +156,10 @@ function current_git_branch {
 
 export EDITOR=io.elementary.code
 export BUNDLER_EDITOR=code
+
+if [ -f ~/.config/exercism/exercism_completion.bash ]; then
+  source ~/.config/exercism/exercism_completion.bash
+fi
+
+# For asdf postgresql plugin with SSL support
+export POSTGRES_EXTRA_CONFIGURE_OPTIONS=--with-openssl
