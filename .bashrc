@@ -163,3 +163,4 @@ fi
 
 # For asdf postgresql plugin with SSL support
 export POSTGRES_EXTRA_CONFIGURE_OPTIONS=--with-openssl
+export RUBY_CONFIGURE_OPTS=--enable-shared
