@@ -129,6 +129,10 @@ fi
 #export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
 #export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
 
+if [ -d ~/bin ]; then
+    PATH=$PATH:$HOME/bin
+fi
+
 # --- Git prompt ---
 export PROMPT_DIRTRIM=3
 function color_my_prompt {
