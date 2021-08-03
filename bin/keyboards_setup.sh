@@ -9,4 +9,4 @@ echo "Setting up notebook keyboard $id_1 to US"
 setxkbmap -device $id_1 -layout us -variant intl
 
 echo "Setting up notebook keyboard $id_2 to ES"
-setxkbmap -device $id_2 latam -model logitech_base
+setxkbmap -device $id_2 es -model logitech_base
