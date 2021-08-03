@@ -50,7 +50,9 @@ bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
 #bindsym $mod+Ctrl+m exec pavucontrol
 
 # megatux: start multiple keyboard layout support
-exec --no-startup-id ibus-daemon
+# exec --no-startup-id ibus-daemon
+exec --no-startup-id /home/megatux/bin/keyboards_setup.sh
+
 
 ################################################################################################
 
