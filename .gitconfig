@@ -10,7 +10,7 @@
   l = log --oneline
 	restore = clean -xfd
 [core]
-	editor = mousepad
+	editor = micro
 [credential]
 	helper = /usr/lib/git-core/git-credential-gnome-keyring
 [guitool "Rebase onto..."]
@@ -31,3 +31,5 @@
 	required = true
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
+[init]
+	defaultBranch = main
