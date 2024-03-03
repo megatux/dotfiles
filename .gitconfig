@@ -11,8 +11,6 @@
 	restore = clean -xfd
 [core]
 	editor = micro
-[credential]
-	helper = /usr/lib/git-core/git-credential-gnome-keyring
 [guitool "Rebase onto..."]
     cmd = git rebase $REVISION
     revprompt = yes
@@ -33,3 +31,6 @@
 	smudge = git-lfs smudge -- %f
 [init]
 	defaultBranch = main
+[credential]
+	helper = cache --timeout 7200
+	helper = oauth
