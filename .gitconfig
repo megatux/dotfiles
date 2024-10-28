@@ -4,11 +4,12 @@
 	name = Cristian Molina
 	email = megatux@gmail.com
 [alias]
-  st = status
+  	st = status
 	co = checkout
 	ci = commit
-  l = log --oneline
+  	l = log --oneline
 	restore = clean -xfd
+	stashedlist = diff --name-only --cached
 [core]
 	editor = micro
 [guitool "Rebase onto..."]
