@@ -10,6 +10,8 @@
   	l = log --oneline
 	restore = clean -xfd
 	stashedlist = diff --name-only --cached
+	branchname = rev-parse --abbrev-ref HEAD
+	bname = rev-parse --abbrev-ref HEAD
 [core]
 	editor = micro
 [guitool "Rebase onto..."]
@@ -35,3 +37,6 @@
 [credential]
 	helper = cache --timeout 7200
 	helper = oauth
+[diff]
+	srcPrefix = "SRC: "
+	dstPrefix = "DST: "
