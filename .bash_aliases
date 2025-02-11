@@ -7,7 +7,6 @@ alias bespec="bundle exec rspec"
 alias spec="bundle exec rspec"
 alias specd="bundle exec rspec -fd"
 alias got="printf '\n\nGOT is the best TV series. Anyway, maybe you mean git, so...\n\n\n'; git $*"
-alias cattlematch_reset='curl -XDELETE '\''http://localhost:9200/_all'\'' && bundle exec rake db:drop db:create db:migrate db:seed && bundle exec rake development:load_data searchkick:reindex:all'
 alias xopen=xdg-open
 alias cop="be rubocop"
 alias rtest="RAILS_ENV=test be ruby -Itest $*"
