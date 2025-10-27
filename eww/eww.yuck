@@ -1,0 +1,92 @@
+; Eww config for a simple rice bar with date, time, system tray, and theme switcher
+; Save this file as ~/.config/eww/eww.yuck and run with `eww open rice-bar`
+
+;; Widgets
+
+; greeter widget example
+(defwidget greeter [?text name]
+  (box :orientation "horizontal"
+       :halign "center"
+    text
+    (button :onclick "notify-send 'Hello' 'Hello, ${name}'"
+      "Greet")))
+
+(defwidget labeled-container [name]
+  (box :class "container"
+    name
+    (children)))
+
+(defvar self-theme
+  "gsettings get org.gnome.desktop.interface color-scheme | grep -q 'prefer-dark' && echo 'dark' || echo 'light'")
+
+(defvar de-theme "light")
+
+;; new widget: system-wide theme switcher (GNOME / KDE)
+(defwidget system-theme-switcher []
+  (box :orientation "horizontal" :spacing 6 :halign "end"
+
+    ;; GNOME: sets color-scheme and gtk-theme, then updates eww var
+    (button :onclick "sh -c \"gsettings set org.gnome.desktop.interface color-scheme 'prefer-light' && gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita' && eww update de-theme='light' || true\"" "☀️")
+    (button :onclick "sh -c \"gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark' && gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark' && eww update de-theme='dark' || true\"" "🌙")
+    ;; KDE: write kdeglobals ColorScheme value (may require a logout/reload for full effect)
+    ;; Uncomment to enable KDE buttons:
+    ;; (button :onclick "sh -c \"kwriteconfig5 --file kdeglobals --group General --key ColorScheme 'BreezeLight' && qdbus org.kde.KWin /KWin reconfigure >/dev/null 2>&1 || true; eww update de-theme='light' || true\"" "KDE Light")
+    ;; (button :onclick "sh -c \"kwriteconfig5 --file kdeglobals --group General --key ColorScheme 'BreezeDark' && qdbus org.kde.KWin /KWin reconfigure >/dev/null 2>&1 || true; eww update de-theme='dark' || true\"" "KDE Dark")
+  ))
+
+;; Date and time variables (updated every x seconds)
+(defpoll current-time :interval "30s" "date '+%H:%M'")
+
+(defpoll current-date :interval "60s" "date '+%A, %B %d, %Y'")
+
+;; Date widget
+(defwidget date-widget []
+  (box :class "date-widget"
+    :orientation "horizontal"
+    :spacing 2
+    :halign "start"
+    (label :text "📅")
+    (label :text current-date :class "date-text")))
+
+;; Time widget
+(defwidget time-widget []
+  (box :class "time-widget"
+    :orientation "horizontal"
+    :spacing 4
+    :halign "center"
+    (label :text "🕐")
+    (label :text current-time :class "time-text")))
+
+
+;; Main rice bar window
+(defwindow rice-bar
+  :monitor "eDP-1"
+  :geometry (geometry :x "0%"
+                      :y "1%"
+                      :width "70%"
+                      :anchor "top center")
+  :stacking "bg"
+  :reserve (struts :distance "240px" :side "top")
+  :exclusive false
+  :focusable "ondemand"
+  :namespace "rice-bar"
+
+  (box :class self-theme
+    :orientation "horizontal"
+    :spacing 2
+
+    ;; left side - date
+    (date-widget)
+
+    ;; center - time
+    (time-widget)
+
+    ;; top-right controls
+    (box :halign "end" :orientation "horizontal" :spacing 6
+      ; (theme-toggle)
+      (system-theme-switcher)
+      (systray)
+      (button :onclick "eww close rice-bar" :class "exit-button" "✕")
+    )
+  )
+)
