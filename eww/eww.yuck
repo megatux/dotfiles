@@ -57,23 +57,24 @@
     (label :text "🕐")
     (label :text current-time :class "time-text")))
 
-
-
-;; Brightness control variables and widget
-(defpoll current-brightness :interval "5s"
+;; Replace the defvar with defpoll for initial brightness value
+(defpoll current-brightness :interval "999h"  ;; Very long interval since we update manually
   "brightnessctl info | grep -oE '[0-9]+%' | head -n 1")
 
+;; Updated brightness control widget
 (defwidget brightness-control []
   (box :class "brightness-control"
        :orientation "horizontal"
        :spacing 4
        :space-evenly false
-    (button :onclick "brightnessctl set 5%-"
-            :class "brightness-button" "🔅")
+    (button :onclick "brightnessctl set 5%- && eww update current-brightness=\"$(brightnessctl info | grep -oE '[0-9]+%' | head -n 1)\""
+            :class "brightness-button" 
+            "🔅")
     (label :text current-brightness
            :class "brightness-label")
-    (button :onclick "brightnessctl set +5%"
-            :class "brightness-button" "🔆")))
+    (button :onclick "brightnessctl set +5% && eww update current-brightness=\"$(brightnessctl info | grep -oE '[0-9]+%' | head -n 1)\""
+            :class "brightness-button" 
+            "🔆")))
 
 
 ;; Main rice bar window
