@@ -1,3 +1,7 @@
+# Default gems isntalled on all Ruby versions
 bundler
 pry
 rspec
+ruby-lsp
+amazing-print
+standard-rb
