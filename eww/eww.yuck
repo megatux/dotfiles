@@ -58,35 +58,62 @@
     (label :text current-time :class "time-text")))
 
 
+
+;; Brightness control variables and widget
+(defpoll current-brightness :interval "5s"
+  "brightnessctl info | grep -oE '[0-9]+%' | head -n 1")
+
+(defwidget brightness-control []
+  (box :class "brightness-control"
+       :orientation "horizontal"
+       :spacing 4
+       :space-evenly false
+    (button :onclick "brightnessctl set 5%-"
+            :class "brightness-button" "🔅")
+    (label :text current-brightness
+           :class "brightness-label")
+    (button :onclick "brightnessctl set +5%"
+            :class "brightness-button" "🔆")))
+
+
 ;; Main rice bar window
 (defwindow rice-bar
   :monitor "eDP-1"
   :geometry (geometry :x "0%"
                       :y "1%"
-                      :width "70%"
+                      :width "400px"
                       :anchor "top center")
   :stacking "bg"
-  :reserve (struts :distance "240px" :side "top")
+  :reserve (struts :distance "40px" :side "top")
   :exclusive false
   :focusable "ondemand"
   :namespace "rice-bar"
 
   (box :class self-theme
-    :orientation "horizontal"
-    :spacing 2
+       :orientation "horizontal"
+       :spacing 1
+       :space-evenly false    ;; Added to control spacing better
 
-    ;; left side - date
-    (date-widget)
-
-    ;; center - time
-    (time-widget)
-
-    ;; top-right controls
-    (box :halign "end" :orientation "horizontal" :spacing 6
-      ; (theme-toggle)
+    ;; Stack controls vertically on the right
+    (box :orientation "vertical"
+         :spacing 2
+         :halign "end"
+         :valign "center"
       (system-theme-switcher)
+      (brightness-control))
+
+    ;; Center stack for date/time
+    (box :orientation "vertical"
+         :spacing 2
+         :halign "center"
+      (date-widget)
+      (time-widget))
+
+    ;; Right-most controls
+    (box :orientation "horizontal"
+         :spacing 4
+         :halign "end"
       (systray)
-      (button :onclick "eww close rice-bar" :class "exit-button" "✕")
-    )
-  )
-)
+      (button :onclick "eww close rice-bar"
+              :class "exit-button" "✕"))
+  ))
